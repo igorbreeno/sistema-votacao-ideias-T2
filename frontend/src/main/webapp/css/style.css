@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+h1, h2 { margin-top: 0; }
+
+form {
+    display: grid;
+    gap: 8px;
+    margin: 16px 0 24px;
+}
+
+input, textarea, select, button {
+    padding: 9px;
+    font-size: 14px;
+}
+
+textarea { min-height: 100px; }
+
+button, .botao {
+    cursor: pointer;
+}
+
+.botao {
+    display: inline-block;
+    padding: 9px 14px;
+    background: #e7e7e7;
+    text-decoration: none;
+    margin: 8px 4px 8px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.form-voto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.erro { color: #a00; }

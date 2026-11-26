@@ -1,0 +1,222 @@
+{
+  "info": {
+    "name": "Sistema de Votacao de Ideias - API REST",
+    "_postman_id": "d83baf20-2f23-4c91-bde0-7c3b0f4a9a12",
+    "description": "Requisicoes para testar a API REST do Sistema de Votacao de Ideias.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/sistema-votacao-ideias"
+    },
+    {
+      "key": "usuarioId",
+      "value": "1"
+    },
+    {
+      "key": "ideiaId",
+      "value": "1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "clientKey",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Obter JWT",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"chave\":\"{{clientKey}}\"}"
+        },
+        "url": "{{baseUrl}}/api/auth/token"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.collectionVariables.set(\"token\", pm.response.json().token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Listar usuarios",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/usuarios"
+          }
+        },
+        {
+          "name": "Cadastrar usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana Silva\",\n  \"email\": \"ana@email.com\",\n  \"senha\": \"senha-de-exemplo\"\n}"
+            },
+            "url": "{{baseUrl}}/api/usuarios"
+          }
+        },
+        {
+          "name": "Consultar usuario",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}"
+          }
+        },
+        {
+          "name": "Atualizar usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana Silva Atualizada\",\n  \"email\": \"ana.atualizada@email.com\"\n}"
+            },
+            "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}"
+          }
+        },
+        {
+          "name": "Excluir usuario",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ideias",
+      "item": [
+        {
+          "name": "Listar ideias",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/ideias"
+          }
+        },
+        {
+          "name": "Cadastrar ideia",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Melhorar a biblioteca\",\n  \"descricao\": \"Ampliar o horario de funcionamento.\",\n  \"usuarioId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/api/ideias"
+          }
+        },
+        {
+          "name": "Consultar ideia",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/ideias/{{ideiaId}}"
+          }
+        },
+        {
+          "name": "Atualizar ideia",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Biblioteca ampliada\",\n  \"descricao\": \"Ampliar o horario e o acervo.\",\n  \"usuarioId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/api/ideias/{{ideiaId}}"
+          }
+        },
+        {
+          "name": "Excluir ideia",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/ideias/{{ideiaId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Votos",
+      "item": [
+        {
+          "name": "Registrar voto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": 1,\n  \"ideiaId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/api/votos"
+          }
+        },
+        {
+          "name": "Contar votos da ideia",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/votos/contagem/{{ideiaId}}"
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  }
+}

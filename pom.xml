@@ -1,0 +1,1 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion><groupId>br.com.votacao</groupId><artifactId>votacao-t2</artifactId><version>1.0.0</version><packaging>pom</packaging><modules><module>backend</module><module>frontend</module></modules></project>

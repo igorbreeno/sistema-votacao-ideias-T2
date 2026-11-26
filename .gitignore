@@ -1,0 +1,23 @@
+﻿# Arquivos compilados pelo Maven
+**/target/
+
+# Arquivos de ambiente e credenciais
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+*.bak
+
+# Configurações de editores
+.vscode/
+.idea/
+*.iml
+
+# Arquivos do sistema operacional
+Thumbs.db
+.DS_Store
